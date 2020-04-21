@@ -1,0 +1,18 @@
+;;; 3x3.lat  7/17/90
+
+(in-package :user)
+
+(setq 3x3 (make-finite-lattice
+    ;; '(0 1 a b c d e f g)
+    '(
+      (0 (b d))
+      (a (e))
+      (b (a f))
+      (e (1))
+      (c (g))
+      (d (f c))
+      (f (e g))
+      (g (1))
+      (1 ())  ) ) )
+
+(setq *lat* 3x3)

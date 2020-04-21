@@ -1,0 +1,29 @@
+
+        A 3-generated infinite lattice of width 3.
+
+
+
+
+                        o
+                       /|
+                      / o
+                     /  |\
+                    /   o \
+                   /   /|  \
+                  /   / o   \
+               a o   /  |\   \
+                 |  /   o \   \
+                 | /   /   \   o c
+                 |/   /     \  |
+                 o   /       \ |
+                 |  /         \|
+                 | /    .      o
+                 |/     .      .
+                 o      .      .
+                  .           .
+                   .         .
+                    .    b  .
+                     .  o  .
+                      . | .
+                        |
+                        o

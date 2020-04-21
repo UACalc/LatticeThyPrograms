@@ -1,0 +1,52 @@
+
+0    m0
+1    (m0 + b(m0 + c(m0 + b(m0 + cm1))))(m0 + c(m0 + b(m0 + c(m0 + bm1))))
+2    m0 + b(m0 + c(m0 + b(m0 + cm1)))
+3    m0 + c(m0 + b(m0 + c(m0 + bm1)))
+4    m0 + b(m0 + c(m0 + b(m0 + cm1))) + c(m0 + b(m0 + c(m0 + bm1)))
+5    (m0 + b(m0 + c(m0 + bm1)))(m0 + c(m0 + b(m0 + cm1)))
+6    m0 + c(m0 + b(m0 + cm1))
+7    m0 + b(m0 + c(m0 + bm1))
+8    m0 + b(m0 + c(m0 + bm1)) + c(m0 + b(m0 + cm1))
+9    (m0 + b(m0 + cm1))(m0 + c(m0 + bm1))
+10   m0 + b(m0 + cm1)
+11   m0 + c(m0 + bm1)
+12   m0 + b(m0 + cm1) + c(m0 + bm1)
+13   (m0 + bm1)(m0 + cm1)
+14   m0 + cm1
+15   m0 + bm1
+16   m0 + bm1 + cm1
+17   m1
+
+0    a
+1    b
+2    c
+3    a0
+4    b0
+5    c0
+6    a1
+7    b1
+8    c1
+9    d
+10   e
+11   f
+12   g
+13   h
+14   i
+15   m0
+16   m1
+17   u
+18   z
+19   bm1
+20   bm0
+21   cm1
+22   cm0
+23   m0 + bm1
+24   m0 + cm1
+25   m0 + bm1 + cm1
+26   b(m0 + cm1)
+27   c(m0 + bm1)
+28   (m0 + bm1)(m0 + cm1)
+
+
+

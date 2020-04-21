@@ -1,0 +1,21 @@
+; m3m3.lat
+;;;  a structure version
+
+(in-package :user)
+
+(setq m3m3 (make-finite-lattice
+    ;; '(0 1 z a b c u  z1 a1 b1 c1 u1)
+    '(
+      (0 (z z1))
+      (z (a b c  ))
+      (z1 (a1 b1 c1 ))
+      (a (u))
+      (b (u))
+      (c (u))
+      (a1 (u1))
+      (b1 (u1))
+      (c1 (u1))
+      (u (1))
+      (u1 (1))
+      (1 ())  ) ) )
+

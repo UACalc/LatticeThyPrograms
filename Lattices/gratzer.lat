@@ -1,0 +1,18 @@
+; gratzer.lat
+;;; This is related to his correction of his n^2 paper with Rival and
+;;; Zagia.
+
+(in-package :user)
+
+(setq gratzer (make-finite-lattice
+    '(
+      (0 (x1 x3))
+      (x1 (x2 y1))
+      (x3 (x2 y3))
+      (x2 (z))
+      (z (y2))
+      (y1 (y2))
+      (y3 (z)) 
+      (y2 ())
+      )))
+

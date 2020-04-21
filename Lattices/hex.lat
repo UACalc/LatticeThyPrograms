@@ -1,0 +1,14 @@
+; hex.lat
+
+(in-package :user)
+
+(setq hex (make-finite-lattice
+    ;; '(0 1 a b c d )
+    '(
+      (0 (a b ))
+      (a (d))
+      (b (c))
+      (c (1))
+      (d (1))
+      (1 ())  ) ) )
+

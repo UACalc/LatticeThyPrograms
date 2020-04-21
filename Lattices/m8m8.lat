@@ -1,0 +1,31 @@
+; m8m8.lat
+;;;  a structure version
+
+(in-package :user)
+
+(setq m8m8 (make-finite-lattice
+    ;; '(0 1 z a b c d e f g h u  z1 a1 b1 c1 d1 e1 f1 g1 h1 u1)
+    '(
+      (0 (z z1))
+      (z (a b c d e f g h ))
+      (z1 (a1 b1 c1 d1 e1 f1 g1 h1 ))
+      (a (u))
+      (b (u))
+      (c (u))
+      (d (u))
+      (e (u))
+      (f (u))
+      (g (u))
+      (h (u))
+      (a1 (u1))
+      (b1 (u1))
+      (c1 (u1))
+      (d1 (u1))
+      (e1 (u1))
+      (f1 (u1))
+      (g1 (u1))
+      (h1 (u1))
+      (u (1))
+      (u1 (1))
+      (1 ())  ) ) )
+

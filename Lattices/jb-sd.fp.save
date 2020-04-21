@@ -1,0 +1,250 @@
+; file jb-sd.fp
+
+; see his email of 4/1/2020
+
+; Take the join closure of his relation and see if
+; the resulting lattice is SD. 
+
+; Start with just M_3 to test things.
+
+
+
+;      a   b   c
+;      o   o   o
+;       \  |  /
+;        \ | /
+;         \|/
+;          o z
+
+; with all three meets defined
+
+; Instructions:
+; copy and paste the (make-fp-lattice-from-relation 
+; below. Then do
+; (setq *lat* *)
+; (close-under <the elements of X_y of JB note> #'s)
+; (make-finite-lattice-from-grtrql * #'grtrql)
+; (setq s<y from JB>  *)
+; (sd-meet-p s<y>)
+; (sd-join-p s<y>)
+
+
+
+
+
+(in-package :user)
+
+(make-fp-lattice-from-relations '(a b c z) 
+    '(
+       (z a)
+       (z b)
+       (z c)
+       (a (s b c))
+       (b (s a c))
+       (c (s b a))
+      ))
+
+; jb's ji's up to a2 and e2
+; this gave an SD lattice with 61 elements
+
+
+
+
+
+(make-fp-lattice-from-relations 
+    '(a0 a1 a2 c0 c1 b0 b1 d0 d1 e0 e1 e2 f0 f1)
+    '(
+       (a0 c0)
+       (a0 e0)
+       (a1 c1)
+       (a1 e1)
+       (c0 a1)
+       (c0 f0)
+       (c1 a2)
+       (c1 f1)
+       (e0 b0)
+       (e1 b1)
+       (f0 d0)
+       (f1 d1)
+       (a2 e2)
+       (a1 (s b0 c0))
+       (a2 (s b1 c1))
+       (b0 (s e0 a2))
+       (c1 (s a1 d0))
+       (e1 (s a1 e0))
+       (e2 (s a2 e1))
+       (f1 (s c1 f0))
+       (b0 (s e0 b1))
+       (d0 (s f0 d1))
+      ))
+
+(setq *lat* (make-fp-lattice-from-relations
+    '(a0 a1 a2 a3 c0 c1 c2 b0 b1 b2 d0 d1 d2 e0 e1 e2 e3 f0 f1 f2)
+    '(
+       (a0 c0)
+       (a0 e0)
+       (a1 c1)
+       (a1 e1)
+       (a2 c2)
+       (a2 e2)
+       (a3 e3)
+       (c0 a1)
+       (c0 f0)
+       (c1 a2)
+       (c1 f1)
+       (c2 a3)
+       (c2 f2)
+       (e0 b0)
+       (e1 b1)
+       (e2 b2)
+       (f0 d0)
+       (f1 d1)
+       (f2 d2)
+       (a1 (s b0 c0))
+       (a2 (s b1 c1))
+       (a3 (s b2 c2))
+       (b0 (s e0 a2))
+       (b1 (s e1 a3))
+       (c1 (s a1 d0))
+       (c2 (s a2 d1))
+       (d0 (s f0 c2))
+       (e1 (s a1 e0))
+       (e2 (s a2 e1))
+       (e3 (s a3 e2))
+       (f1 (s c1 f0))
+       (f2 (s c2 f1))
+       (b0 (s e0 b1))
+       (b1 (s e1 b2))
+       (d0 (s f0 d1))
+       (d1 (s f1 d2))
+      )))
+
+(setq *lat* (make-fp-lattice-from-relations
+    '(a0 a1 a2 a3 a4 c0 c1 c2 c3 c4 b0 b1 b2 b3 d0 d1 d2 d3 e0 e1 e2 e3 e4 f0 f1 f2 f3)
+    '( 
+       (a0 c0)
+       (a0 e0)
+       (a1 c1)
+       (a1 e1)
+       (a2 c2)
+       (a2 e2)
+       (a3 c3)
+       (a3 e3)
+       (a4 c4)
+       (a4 e4)
+       (c0 a1)
+       (c0 f0)
+       (c1 a2)
+       (c1 f1)
+       (c2 a3)
+       (c2 f2)
+       (c3 a4)
+       (c3 f3)
+       (e0 b0)
+       (e1 b1)
+       (e2 b2)
+       (e3 b3)
+       (f0 d0)
+       (f1 d1)
+       (f2 d2)
+       (f3 d3)
+       (a1 (s b0 c0))
+       (a2 (s b1 c1))
+       (a3 (s b2 c2))
+       (a4 (s b3 c3))
+       (b0 (s e0 a2))
+       (b1 (s e1 a3))
+       (b2 (s e2 a4))
+       (c1 (s a1 d0))
+       (c2 (s a2 d1))
+       (c3 (s a3 d2))
+       (c4 (s a4 d3))
+       (d0 (s f0 c2))
+       (d1 (s f1 c3))
+       (e1 (s a1 e0))
+       (e2 (s a2 e1))
+       (e3 (s a3 e2))
+       (e4 (s a4 e3))
+       (f1 (s c1 f0))
+       (f2 (s c2 f1))
+       (f3 (s c3 f2))
+       (b0 (s e0 b1))
+       (b1 (s e1 b2))
+       (b2 (s e2 b3))
+       (d0 (s f0 d1))
+       (d1 (s f1 d2))
+       (d2 (s f2 d3))
+      )))
+
+
+;;;;;;;;;;;;; delete me ;;;;;;;;;
+(let* ((gens '(a b c z))
+       (uc '(
+           (a ())
+           (b ())
+           (c ())
+	   (z (a b c))))
+       (joins '())
+       (meets '(
+	      (z ((a b) (a c) (b c))))))
+      (setq atomless (make-fp-lattice gens uc joins meets t)))
+
+(setq *lat* atomless)
+
+
+(let* ((gens '(a b c z u))
+       (uc '(
+           (u ())
+           (a (u))
+           (b (u))
+           (c (u))
+           (z (a b c))))
+       (joins '() )
+       (meets '(
+              (z ((a b) (a c) (b c))))) )
+      (setq atomless0 (make-fp-lattice gens uc joins meets t)))
+
+(let* ((gens '(a b c z u))
+       (uc '(
+           (u ())
+           (a (u))
+           (b (u))
+           (c (u))
+           (z (a b c))))
+       (joins '(
+              (u ((a b)))))
+       (meets '(
+              (z ((a b) (a c) (b c))))) )
+      (setq atomless1 (make-fp-lattice gens uc joins meets t)))
+
+(let* ((gens '(a b c z u))
+       (uc '(
+           (u ())
+           (a (u))
+           (b (u))
+           (c (u))
+           (z (a b c))))
+       (joins '(
+              (u ((a b) (a c)   ))))
+       (meets '(
+              (z ((a b) (a c) (b c))))) )
+      (setq atomless2 (make-fp-lattice gens uc joins meets t)))
+
+(let* ((gens '(a b c z u))
+       (uc '(
+           (u ())
+           (a (u))
+           (b (u))
+           (c (u))
+           (z (a b c))))
+       (joins '(
+              (u ((a b) (a c) (b c)   ))))
+       (meets '(
+              (z ((a b) (a c) (b c))))) )
+      (setq atomless3 (make-fp-lattice gens uc joins meets t)))
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+; b4.lat
+;;;  a structure version
+
+(in-package :user)
+
+(setq b4 (make-finite-lattice
+    ;; '(z0 a0 b0 c0 d0 e0 f0 t0 z1 a1 b1 c1 d1 e1 f1 t1 )
+    '(
+      (z0 (a0 b0 c0 z1))
+      (a0 (d0 e0 a1))
+      (b0 (d0 f0 b1))
+      (c0 (e0 f0 c1))
+      (d0 (t0 d1))
+      (e0 (t0 e1))
+      (f0 (t0 f1))
+      (t0 (t1))
+      (z1 (a1 b1 c1))
+      (a1 (d1 e1))
+      (b1 (d1 f1))
+      (c1 (e1 f1))
+      (d1 (t1))
+      (e1 (t1))
+      (f1 (t1)) 
+      (t1 ()) )))
+

@@ -1,0 +1,26 @@
+; l7-cover.lat
+
+;;; The unique ji cover of V(L_7), see Rose's monograph.
+
+(in-package :user)
+
+
+(setq l7-cover (make-finite-lattice
+    ;; '(0 1 a b b_0 b1 c d e f g h i j k )
+    '(
+      (0 (e b1))
+      (a (c))
+      (b (f))
+      (b_0 (g))
+      (b1 (h))
+      (c (f g h))
+      (d (a b))
+      (e (d b_0))
+      (f (i j))
+      (g (i k))
+      (h (j k))
+      (i (1))
+      (j (1))
+      (k (1))
+      (1 ())  ) ) )
+

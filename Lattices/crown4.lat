@@ -1,0 +1,18 @@
+; crown4.lat
+;;;  a 4 crown and 0 and 1.
+
+(in-package :user)
+
+(setq crown4 (make-finite-lattice
+    '(
+      (0 (a b c d))
+      (a (e f))
+      (b (f g))
+      (c (g h))
+      (d (h e))
+      (e (1))
+      (f (1))
+      (g (1))
+      (h (1))
+      (1 ())  ) ) )
+

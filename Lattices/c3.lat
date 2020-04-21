@@ -1,0 +1,19 @@
+; c3.lat
+
+(in-package :user)
+
+;;;  a structure version
+
+(setq c3 (make-finite-lattice
+    ;; '(0 1 a b c d e f x )
+    '(
+      (0 (a b c))
+      (a (d e))
+      (b (d f))
+      (c (e f))
+      (d (1))
+      (x (1))
+      (e (1))
+      (f (x))
+      (1 ())  ) ) )
+

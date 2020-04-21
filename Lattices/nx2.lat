@@ -1,0 +1,47 @@
+(in-package :user)
+   
+
+;;; This makes 2 \times n, on the set 0, ..., 2n-1, so the above 
+;;; fast proceedure can be used. It also changes the lssql so
+;;; that it uses a 2-dim array.
+;;; (Actually none of this is now necessary, since all-lin-exts
+;;; works with all posets.)
+;;; The number of linear extension is the catalan number.
+
+(defun l2n (n &aux uc)
+  (dotimes (i (- n 1))
+	   (push (list i (list (+ 1 i) (+ i n))) uc) )
+  (dotimes (i (- n 1))
+	   (push (list (+ i n) (list (+ i 1 n))) uc))
+  (push (list (- n 1) (list (+ n n -1))) uc)
+  (push (list (+ n n -1) nil) uc)
+  (let* ((lat (make-finite-lattice uc))
+	 (tab (make-array (list (* 2 n) (* 2 n)) 
+			  :element-type 'system::boolean)) )
+	(dotimes (i (- n 1))
+		 (dotimes (j n) (when (<= i j)
+				      (setf (aref tab i j) t)
+				      (setf (aref tab (+ n i) (+ n j)) t)
+				      (setf (aref tab i (+ n j)) t))))
+	(setf (aref tab (- n 1) (- n 1)) t)
+	(setf (aref tab (- n 1) (+ n n -1)) t)
+	(setf (aref tab (+ n n -1) (+ n n -1)) t) 
+	(setf (lattice-lssql lat) 
+	      #'(lambda (x y) (aref tab x y)))
+	lat ) )
+
+(defun chain (n &aux uc)
+  (dotimes (i (- n 1))
+	   (push (list i (list (+ 1 i) )) uc) )
+  (push (list (- n 1) nil) uc)
+  (make-finite-lattice uc) )
+  
+
+(defun catalan (n)
+  (labels ((fac (k)
+		(if (= k 0) 
+		    1
+		    (* k (fac (- k 1))))))
+	  (/ (fac (* 2 n)) (* (expt (fac n) 2) (+ n 1)))))
+
+

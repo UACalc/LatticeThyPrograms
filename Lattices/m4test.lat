@@ -1,0 +1,16 @@
+; m4test.lat
+;;;  a structure version
+
+(in-package :user)
+
+(setq m4elems '(0 1 a b c d)
+  m4uc '(
+      (0 (a b c d))
+      (a (1))
+      (b (1))
+      (c (1))
+      (d (1))
+      (1 ())  ) )
+
+(setq m4 (make-finite-poset m4uc))
+

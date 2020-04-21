@@ -1,0 +1,14 @@
+; n5.lat
+;;;  a structure version
+
+(in-package :user)
+
+(setq n5 (make-finite-lattice
+    ;; '(0 1 a b c)
+    '(
+      (0 (b c))
+      (a (1))
+      (b (1))
+      (c (a))
+      (1 ())  ) ) )
+

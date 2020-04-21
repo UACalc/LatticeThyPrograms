@@ -1,0 +1,15 @@
+;;; d2dual.lat  7/17/90
+
+(in-package :user)
+
+(setq d2dual (make-finite-lattice
+    ;; '(0 1 a b c d e)
+    '(
+      (0 (d e))
+      (a (1))
+      (b (1))
+      (c (1))
+      (d (a b))
+      (e (b c))
+      (1 ())  ) ) )
+

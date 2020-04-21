@@ -1,0 +1,233 @@
+
+			A Manual for
+		Lattice and Algebra Lisp Package
+                    Revised 11/10/2014
+
+
+	First do  `cd ~/Dropbox/Lisp/lat/src/', then type
+`clisp -i bldnew.lisp'. 
+
+	The program also deals with finitely presented lattices, finite 
+lattices, congruence lattices, semilattices and their congruences, and
+algebras. But only the free lattice stuff is used here.
+
+	At the end is a listing of some important functions.
+
+	Here is a sample session with comments.
+
+
+% cd ~/Dropbox/Lisp/lat/src/src
+
+	<copyright messages...>
+
+* (load "bldnew.lisp")
+
+;;; Loading source file "bldnew.lisp"
+;;; Loading binary file "latcstr.sbin"
+;;; Loading binary file "util.sbin"
+;;; Loading binary file "general-fns.sbin"
+;;; Loading binary file "finstruct.sbin"
+;;; Loading binary file "lssqlhh.sbin"
+;;; Loading binary file "fpstruct.sbin"
+;;; Loading binary file "kappa.sbin"
+;;; Loading binary file "kappa-dual.sbin"
+;;; Loading binary file "congrlat.sbin"
+;;; Loading binary file "chaindec.sbin"
+;;; Loading binary file "algebras.sbin"
+;;; Loading binary file "freelat.sbin"
+[372]> (join '(b0 b1 e2 d0 d1 d2) jb)
+(S G12 G20 G40 G70 G80 G81)
+> (setq *lat* (make-free-lattice '(a b c d e))) ; this sets *lat* to be the
+#<finitely-presented lattice>		        ; free lattice gen by 
+						; (a b c d e)
+;;; You must do this first. The single quote '(a b c d e) prevents (a b c d e)
+;;; from being treated as a function call. 
+
+> a 			; normally this would give an undefined error but
+A			; make-free-lattice sets the value of all generators
+			; to themselves.
+
+> (p a (s d b))		; p is for meet and s for join. More than 2 operands
+(P A (S B D))		; are ok.
+
+> (p a (s b c a))	; Of course it puts the answer in canonical form.
+A
+
+> (pi **)		; pi stands for prefix to infix.
+"a(b + d)"		; * is the last answer.
+			; ** is the one before that and
+			; *** is the one before that.
+
+> (cji-p ***)		; test if  a(b+c)  is completely join irreducible
+NIL			; the -p part stands for "predicate"
+
+> (cji-p a)		; Of course  a  is cji. 
+((S B C D E)) 		; Anything other than NIL counts as true.
+			; ((S B C D E)) is a list whose only element is
+			; kappa of a. But to get kappa of an element
+			; it is better to use (kap w).
+
+> (lssql a (p (s a b) (s a c)))	; lssql is what I use for less-equal
+T				; grtrql is greater-equal
+
+> (gen-tot-atomic '(a b c d e))	; this gives one totally atomic element
+			; from each symmetry class of those totally 
+			; atomic elements that use all 5 generators. 
+
+((P A B C D E) (S (P A C D E) (P B C D E)) (P (S (P A D E) (P C D E))
+(S (P B D E) (P C D E))) (S (P A D E) (P B D E) (P C D E)) (P (S (P A
+E) (P D E)) (S (P B E) (P D E)) (S (P C E) (P D E))) (S (P (S (P A E)
+(P D E)) (S (P C E) (P D E))) (P (S (P B E) (P D E)) (S (P C E) (P D
+E)))) (P (S (P A E) (P C E) (P D E)) (S (P B E) (P C E) (P D E))) (S (P
+A E) (P B E) (P C E) (P D E)) (P (S A E) (S B E) (S C E) (S D E)) (S (P
+(S A E) (S C E) (S D E)) (P (S B E) (S C E) (S D E))) (P (S (P (S A E)
+(S D E)) (P (S C E) (S D E))) (S (P (S B E) (S D E)) (P (S C E) (S D
+E)))) (S (P (S A E) (S D E)) (P (S B E) (S D E)) (P (S C E) (S D E)))
+(P (S A D E) (S B D E) (S C D E)) (S (P (S A D E) (S C D E)) (P (S B D
+E) (S C D E))) (P (S A C D E) (S B C D E)) (S A B C D E))
+
+> (pi-list *)		; this one is very useful.
+
+0    abcde
+1    acde + bcde
+2    (ade + cde)(bde + cde)
+3    ade + bde + cde
+4    (ae + de)(be + de)(ce + de)
+5    (ae + de)(ce + de) + (be + de)(ce + de)
+6    (ae + ce + de)(be + ce + de)
+7    ae + be + ce + de
+8    (a + e)(b + e)(c + e)(d + e)
+9    (a + e)(c + e)(d + e) + (b + e)(c + e)(d + e)
+10   ((a + e)(d + e) + (c + e)(d + e))((b + e)(d + e) + (c + e)(d + e))
+11   (a + e)(d + e) + (b + e)(d + e) + (c + e)(d + e)
+12   (a + d + e)(b + d + e)(c + d + e)
+13   (a + d + e)(c + d + e) + (b + d + e)(c + d + e)
+14   (a + c + d + e)(b + c + d + e)
+15   a + b + c + d + e
+> (setq ta **)		; this just saves it as the variable  ta.
+
+((P A B C D E) (S (P A C D E) (P B C D E)) (P (S (P A D E) (P C D E))
+(S (P B D E) (P C D E))) (S (P A D E) (P B D E) (P C D E)) (P (S (P A
+E) (P D E)) (S (P B E) (P D E)) (S (P C E) (P D E))) (S (P (S (P A E)
+(P D E)) (S (P C E) (P D E))) (P (S (P B E) (P D E)) (S (P C E) (P D
+E)))) (P (S (P A E) (P C E) (P D E)) (S (P B E) (P C E) (P D E))) (S (P
+A E) (P B E) (P C E) (P D E)) (P (S A E) (S B E) (S C E) (S D E)) (S (P
+(S A E) (S C E) (S D E)) (P (S B E) (S C E) (S D E))) (P (S (P (S A E)
+(S D E)) (P (S C E) (S D E))) (S (P (S B E) (S D E)) (P (S C E) (S D
+E)))) (S (P (S A E) (S D E)) (P (S B E) (S D E)) (P (S C E) (S D E)))
+(P (S A D E) (S B D E) (S C D E)) (S (P (S A D E) (S C D E)) (P (S B D
+E) (S C D E))) (P (S A C D E) (S B C D E)) (S A B C D E))
+
+> (nth 4 ta)		; nth return the nth elements of a list (0 based)
+(P (S (P A E) (P D E)) (S (P B E) (P D E)) (S (P C E) (P D E)))
+
+> (kap *)		; evaluate kappa of this element
+(S D (P (S A B C) (S A B D) (S A C D) (S B C D)))
+
+> (pi *)		; print it in prefix
+"d + (a + b + c)(a + b + d)(a + c + d)(b + c + d)"
+
+> (int3-1 (nth 5 ta))	; int3-1 gives the middle element of the 3
+			; element interval described on the top of p. 40
+			; of Freese-Nation covers paper. It's argument
+			; must be a cmi totally atomic element.
+(P (S (P (S (P A E) (P D E)) (S (P C E) (P D E))) (P (S (P B E) (P D
+E)) (S (P C E) (P D E)))) (S (P (S (P B E) (P D E)) (S (P C E) (P D
+E))) (P (S (P A B C D) (P A B C E) (P A C D E) (P B C D E)) (S (P E (S
+(P A B C D) (P A B C E) (P A B D E))) (P E (S (P A B C D) (P A B C E)
+(P A C D E))) (P E (S (P A B C D) (P A B C E) (P B C D E)))))))
+
+> (ss-p *)	; ss-p tests if it is semisingular. (It is.)
+T		; In fact all obtained in this way (ie. (int3-1 q)
+		; where  q  is a meet irreducible tot. atomic elt.) are.
+
+> (ss-p (kap **))	; Its kappa is also, but not all such kappa are
+T			; as the example below shows.
+
+> (nth 7 ta)
+(S (P A E) (P B E) (P C E) (P D E))
+
+> (int3-1 *)
+(P (S (P A E) (P B E) (P C E) (P D E)) (S (P B E) (P C E) (P D E) (P E
+(S (P A B C D) (P A B C E) (P A B D E) (P A C D E) (P B C D E)))))
+
+> (ss-p *)
+T
+
+> (ss-p (kap **))
+NIL
+
+> (quit)		; this quits
+
+;;;-------------------end of session-------------------;;;
+
+Basic functions
+
+s w1 w2 ...	takes any number of arguments and returns the canonical
+		form of their join.
+
+p w1 w2	...	same for meet
+
+join L		Its first argument should be a list of elements. It 
+		returns their join. The optional second argument is
+		a lattice, which defaults to the value of *lat*.
+		Most of these functions have an optional argument
+		to specify the lattice. But for free lattice 
+		calculations there is usually only one lattice around
+		so I won't mention the lattice argument below.
+
+meet L		same for meet
+
+lssql w1 w2	Tests if the first argument is less or equal than its 
+		second.
+
+grtrql w1 w2	Greater or equal
+
+ideal L w	w is an element and L is a list of elements. This returns
+		those members of L below w.
+
+filter L w
+
+kap w		Returns either kappa or kappa-dual, which ever is 
+		appropriate. It returns NIL if w is not cji.
+
+cji w
+cji-p w		These both test if w is cji.
+
+cmi w
+cmi-p w
+
+upper-covers w	   The upper covers of w.
+
+lower-covers w
+
+upper-atomic-p w   w is totally atomic iff it is both lower and upper atomic.
+
+lower-atomic-p w
+
+close-under L f	   Closes the list L under f. For f you should use
+		   either #'p or #'s. (#'p is a special lisp for
+		   (function p) which is the function p.
+
+upper-covers-and-filters-from-grtrql elems #'grtrql
+
+
+	The file freelat.lisp has several other important functions
+like ss-p, int3-1, mu, sigma, gen-tot-atomic, lower-median, upper-median.
+
+		
+pi w		Infix form of w.
+
+pi-list L	A numbered listing of the elements of L in infix.
+
+nth n L		nth element of L, zero based.
+
+first L		First element of L. There is also second ... tenth.
+
+cdr L		L with the first element removed.
+
+rest L		Same as cdr.
+
+quit		Quits.
+
+

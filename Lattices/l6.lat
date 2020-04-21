@@ -1,0 +1,89 @@
+
+; l6.lat
+
+;;; L_6^n in the Jonsson Rival notation. Labelled as in Rose's monograph.
+
+(in-package :user)
+
+(defun l6 (n)
+  (labels ((l6-uc (n)
+		  (cond
+		   ((< n 0) 
+		    '( 
+		      ((e 0) ())
+		      (c ((e 0))) 
+		      (a (c)) 
+		      (b ((e 0))) 
+		      ((a 0) (a b)) ))
+		   (t
+		    (let ((uc (l6-uc (- n 1))))
+			 (setf (cdr (first uc)) 
+			       (list (list (list 'e (+ n 1)))))
+			 (append 
+			  (list 
+			   (list (list 'e (+ n 1)) nil)
+			   (list (list 'a (+ n 1)) 
+				 (list
+				  (list 'a n)
+				  (list 'b n)))
+			   (list (list 'b n) 
+				 (list
+				  (list 'e (+ 1 n)))))
+			  uc))))))
+	  (make-finite-lattice (l6-uc n))))
+
+;;; This is also L_6^n, but labelled as in the monograph.
+
+(defun l6-mono (n)
+  (labels ((l6-uc (n)
+		  (cond
+		   ((<= n 0) 
+		    '( 
+		      ((c 1) ())
+		      ((c 0) ((c 1))) 
+		      ((a 0) ((c 0))) 
+		      ((b 0) ((c 1))) 
+		      ((a 1) ((a 0) (b 0))) ))
+		   (t
+		    (let ((uc (l6-uc (- n 1))))
+			 (setf (cdr (first uc)) 
+			       (list (list (list 'c (+ n 1)))))
+			 (append 
+			  (list 
+			   (list (list 'c (+ n 1)) nil)
+			   (list (list 'a (+ n 1)) 
+				 (list
+				  (list 'a n)
+				  (list 'b n)))
+			   (list (list 'b n) 
+				 (list
+				  (list 'c (+ 1 n)))))
+			  uc))))))
+	  (make-finite-lattice (l6-uc n))))
+
+; (defun l6-uc (n)
+; 		  (cond
+; 		   ((< n 0) 
+; 		    '( 
+; 		      ((e 0) ())
+; 		      (c ((e 0))) 
+; 		      (a (c)) 
+; 		      (b ((e 0))) 
+; 		      ((a 0) (a b)) ))
+; 		   (t
+; 		    (let ((uc (l6-uc (- n 1))))
+; 			 (setf (cdr (first uc)) 
+; 			       (list (list (list 'e (+ n 1)))) )
+; 			 (append 
+; 			  (list 
+; 			   (list (list 'e (+ n 1)) nil)
+; 			   (list (list 'a (+ n 1)) 
+; 				 (list
+; 				  (list 'a n)
+; 				  (list 'b n)))
+; 			   (list (list 'b n) 
+; 				 (list
+; 				  (list 'e (+ 1 n)))))
+; 			  uc)))))
+; 
+; 

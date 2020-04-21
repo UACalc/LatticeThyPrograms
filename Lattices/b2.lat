@@ -1,0 +1,13 @@
+; b2.lat
+;;;  a structure version
+
+(in-package :user)
+
+(setq b2 (make-finite-lattice
+    ;; '(0 1 a b )
+    '(
+      (0 (a b ))
+      (a (1))
+      (b (1))
+      (1 ())  ) ) )
+

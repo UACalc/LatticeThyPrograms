@@ -1,0 +1,16 @@
+;;; m33.lat  7/17/90
+
+(in-package :user)
+
+(setq m33 (make-finite-lattice
+    ;; '(0 1 a b c d e f)
+    '(
+      (0 (a b e))
+      (a (f))
+      (b (f))
+      (e (c d f))
+      (c (1))
+      (d (1))
+      (f (1))
+      (1 ())  ) ) )
+

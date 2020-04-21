@@ -1,0 +1,10 @@
+;;; fd4.lat 	6/23/93
+
+(in-package :user)
+
+(let* ((*lat* (make-free-lattice '(a b c d))))
+  (setq fd4 (make-finite-lattice-from-lssql 
+	     (closure (closure '(a b c d) #'s) #'p)
+	     (lattice-lssql *lat*))))
+
+

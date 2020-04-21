@@ -1,0 +1,14 @@
+; m3sl.lat
+;;;  a structure version
+
+(in-package :user)
+
+(setq m3sl (make-finite-semilattice
+    ;; '(0 1 a b c)
+    '(
+      (0 (a b c))
+      (a (1))
+      (b (1))
+      (c (1))
+      (1 ())  ) ) )
+
